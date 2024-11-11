@@ -28,6 +28,19 @@ export const StudentRecord = () =>{
     const formSubmit = (e) =>{
         e.preventDefault();
         if(!studentname || !Roll || !age || !code) return;//checking empty value
+
+        const isDuplicate = studentDetail.some(
+            (student) =>
+                student.name === studentname &&
+                student.roll === Roll &&
+                student.age === age &&
+                student.code === code
+        );
+
+        if (isDuplicate) {
+            alert("Duplicate entry! This student already exists.");
+            return;
+        }
         newStudentDetail((prev) => [
         ...prev,
         { name: studentname, roll: Roll , age:age, code:code}
