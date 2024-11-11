@@ -16,7 +16,6 @@ const Todo = () =>{
         if(task.includes(inputValue)) return;
         setTask((prev) => [...prev, inputValue]);
         setInputValue(''); 
-        console.log(task)
     }
 
     return(
