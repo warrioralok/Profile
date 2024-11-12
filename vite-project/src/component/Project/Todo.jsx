@@ -29,7 +29,24 @@ const Todo = () =>{
     return () => clearInterval(interval);
     },[])
     
+    const deleteVal = (value) =>{
+        console.log("Value to remove:", value);
+    console.log("Current task array:", task);
+
+    // Filter out the item
+    const newArray = task.filter((item) => {
+        
+        return item !== value
+    });
+
+    console.log("Updated array:", newArray);
+    setTask(newArray);
+    }
     
+    const deleteAll = () => {
+        setTask([]);
+    }
+
     return(
         <>
         <form onSubmit={formSubmission}>
@@ -49,13 +66,13 @@ const Todo = () =>{
                     <div className="task-item" key={index}>
                             <span className="task-text">{task}</span>
                             <button className="complete-btn">✔</button>
-                            <button className="delete-btn">✖</button>
+                            <button className="delete-btn" onClick={() =>deleteVal(task)}>✖</button>
                     </div>
                     )
                 })}    
             </div>
         
-            <button  className="clear-btn">Clear All</button>
+            <button  className="clear-btn" onClick={()=>deleteAll()}>Clear All</button>
         </div>
         </form>
         </>
