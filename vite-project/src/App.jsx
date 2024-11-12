@@ -1,6 +1,6 @@
-//import Todo from "./component/Project/Todo"
+import Todo from "./component/Project/Todo"
 
-import { StudentRecord } from "./component/StudentRecord/StudentRecord"
+//import { StudentRecord } from "./component/StudentRecord/StudentRecord"
 
 // import Profile from "./Profile"
 function App() {
@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       {/* <Profile/> */}
-      {/* <Todo/> */}
-      <StudentRecord/>
+      <Todo/>
+      {/* <StudentRecord/> */}
     </>
   )
 }

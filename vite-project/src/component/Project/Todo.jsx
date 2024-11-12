@@ -1,11 +1,11 @@
 import './Todo.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Todo = () =>{
     
     const  [inputValue, setInputValue] = useState('');
     const  [task, setTask] = useState([]);
-
+    const  [dateTime, setDateTime] = useState("")
     const handleInputChange = (value) =>{
         setInputValue(value);
     }
@@ -18,11 +18,24 @@ const Todo = () =>{
         setInputValue(''); 
     }
 
+    useEffect(() =>{
+        const interval = setInterval(()=>{
+            const date = new Date();
+            const getDate = date.toLocaleDateString();
+            const getTime = date.toLocaleTimeString();
+            setDateTime(`${getDate} - Time:${getTime}`)
+    },1000);
+
+    return () => clearInterval(interval);
+    },[])
+    
+    
     return(
         <>
         <form onSubmit={formSubmission}>
             <div className="todo-app">
                 <h1>Todo List</h1>
+                <h3 className='DateTime'>Date: {dateTime}</h3>
                 <p className="current-time" id="currentTime"></p>
         
             <div className="input-container">
