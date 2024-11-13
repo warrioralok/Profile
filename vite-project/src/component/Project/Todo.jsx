@@ -11,26 +11,46 @@ const Todo = () =>{
     
 
     const formSubmission = (value) =>{
-        if (!value) return; // check if input is not empty
-        if(task.includes(value)) return;
-        setTask((prev) => [...prev, value]);
+        const {id , content , checked} = value
+        if (!content) return; // check if input is not empty
+        
+        const ifcontentmatched = task.find((curritem) => curritem.content === content);
+        if(ifcontentmatched) return;
+
+        setTask((prev) => [...prev, {id: id , content: content, checked: checked}]);
         
     }
 
     
     
-    const deleteVal = (value) =>{
-
+    const deleteVal = (content) =>{  
     // Filter out the item
     const newArray = task.filter((item) => {
         
-        return item !== value
+        return item.content !== content
     });
 
     console.log("Updated array:", newArray);
     setTask(newArray);
     }
     
+
+    const checkval = (val) =>{
+        console.log(val)
+        const updateTask = task.map((currTask) =>{
+            if(currTask.content == val){
+                return {...currTask, checked: !currTask.checked};
+                
+            }
+            else{
+                return currTask
+            }
+        })
+        setTask(updateTask)
+    }
+
+
+
     const deleteAll = () => {
         setTask([]);
     }
@@ -41,7 +61,7 @@ const Todo = () =>{
             <div className="todo-app">
                 <DateTime/>
                 <TodoForm onAddTo={formSubmission}/>
-                <TodoList deleteFun={deleteVal} proptask={task}/>
+                <TodoList deleteFun={deleteVal} checkedTodo={checkval} proptask={task}/>
                 <Button deleteAlldata={deleteAll}/>
             </div>
         
