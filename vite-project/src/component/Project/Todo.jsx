@@ -1,13 +1,12 @@
 import './Todo.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TodoForm } from './TodoForm';
 import { Button } from './TodoClearAll';
 import { TodoList } from './Todolist';
 import {DateTime} from './TodoDatetime';
+import { getLocalStorage,setLocalStorage } from './Localstorage';
 const Todo = () =>{
-    
-    
-    const  [task, setTask] = useState([]);
+    const  [task, setTask] = useState( () => getLocalStorage()) ;
     
 
     const formSubmission = (value) =>{
@@ -21,7 +20,10 @@ const Todo = () =>{
         
     }
 
-    
+    // todo add to localStorage
+    useEffect(() => {
+        setLocalStorage({ task }); // Pass task as an object as expected by setLocalStorage
+    }, [task]); 
     
     const deleteVal = (content) =>{  
     // Filter out the item
